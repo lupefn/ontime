@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e912b5f8-a95a-485f-a91e-464d8b378340" name="Tux" url="http://sandbox.cci.drexel.edu">
+        <fileTransfer host="sandbox.cci.drexel.edu" port="22" rootFolder="/home2/home-e/egc39/ci-103/" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
