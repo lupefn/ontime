@@ -1,12 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'base_j.html' %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
-    <p align="center">Hi {{ user.username }}! Welcome to OnTime.</p>
+    <p align="center">Hi {{ user.name }}! Welcome to OnTime.</p>
     <p align="center"><a href="{% url 'logout' %}">logout</a> <a href="{% url 'password_reset' %}">reset password</a></p>
     <p align="center">
+    <font id="MonthYear" size="25"> Calender Generator</font>
 	<br><table align="center" border="2" bgcolor="#ffffff">
 		<tr border="2"> <!-- top row with days of the week -->
 			<td width="65px" height="50px">Sunday</td>
@@ -73,6 +74,9 @@
 			<td id="Sat6"> </td>
 		</tr>
 	</table>
+    <p align="center"> <textarea id="monthInput" placeholder="Enter name month here"></textarea>
+		<textarea id="yearInput" placeholder="Enter year between 1800 and 2199 here"></textarea>
+        <br><button onclick="cal()">Generate Calender</button></p>
 	</p>
 {% else %}
   <p>You are not logged in</p>
