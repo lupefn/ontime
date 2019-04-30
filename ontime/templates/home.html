@@ -1,12 +1,83 @@
-{% extends 'base.html' %}
+{% extends 'base_j.html' %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">logout</a></p>
-  <p><a href="{% url 'password_reset' %}">reset password</a></p>
+    <p align="center">Hi {{ user.name }}! Welcome to OnTime.</p>
+    <p align="center"><a href="{% url 'logout' %}">logout</a> <a href="{% url 'password_reset' %}">reset password</a></p>
+    <p align="center">
+    <font id="MonthYear" size="25"> Calender Generator</font>
+	<br><table align="center" border="2" bgcolor="#ffffff">
+		<tr border="2"> <!-- top row with days of the week -->
+			<td width="65px" height="50px">Sunday</td>
+			<td width="65px">Monday</td>
+			<td width="65px">Tuesday</td>
+			<td width="65px">Wednesday</td>
+			<td width="65px">Thursday</td>
+			<td width="65px">Friday</td>
+			<td width="65px">Saturday</td>
+		</tr>
+		<tr border="2">
+			<td id="Sun1" height="50px"> </td>
+			<td id="Mon1"> </td>
+			<td id="Tue1"> </td>
+			<td id="Wed1"> </td>
+			<td id="Thur1"> </td>
+			<td id="Fri1"> </td>
+			<td id="Sat1"> </td>
+
+		</tr>
+		<tr border="2">
+			<td id="Sun2"  height="50px"> </td>
+			<td id="Mon2"> </td>
+			<td id="Tue2"> </td>
+			<td id="Wed2"> </td>
+			<td id="Thur2"> </td>
+			<td id="Fri2"> </td>
+			<td id="Sat2"> </td>
+		</tr>
+		<tr border="2">
+			<td id="Sun3"  height="50px"> </td>
+			<td id="Mon3"> </td>
+			<td id="Tue3"> </td>
+			<td id="Wed3"> </td>
+			<td id="Thur3"> </td>
+			<td id="Fri3"> </td>
+			<td id="Sat3"> </td>
+		</tr>
+		<tr border="2">
+			<td id="Sun4"  height="50px"> </td>
+			<td id="Mon4"> </td>
+			<td id="Tue4"> </td>
+			<td id="Wed4"> </td>
+			<td id="Thur4"> </td>
+			<td id="Fri4"> </td>
+			<td id="Sat4"> </td>
+		</tr>
+		<tr border="2">
+			<td id="Sun5"  height="50px"> </td>
+			<td id="Mon5"> </td>
+			<td id="Tue5"> </td>
+			<td id="Wed5"> </td>
+			<td id="Thur5"> </td>
+			<td id="Fri5"> </td>
+			<td id="Sat5"> </td>
+		</tr>
+		<tr border="2"> <!-- extra row for months where 30/31 can fall on Sunday or Monday -->
+			<td id="Sun6"  height="50px"> </td>
+			<td id="Mon6"> </td>
+			<td id="Tue6"> </td>
+			<td id="Wed6"> </td>
+			<td id="Thur6"> </td>
+			<td id="Fri6"> </td>
+			<td id="Sat6"> </td>
+		</tr>
+	</table>
+    <p align="center"> <textarea id="monthInput" placeholder="Enter name month here"></textarea>
+		<textarea id="yearInput" placeholder="Enter year between 1800 and 2199 here"></textarea>
+        <br><button onclick="cal()">Generate Calender</button></p>
+	</p>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a>
