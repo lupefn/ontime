@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Class Template</title>
+</head>
+<body>
+    <p align="center">Hi {{ user.name }}! Here is your class list</p>
+    <p align="center"><a href="{% url 'logout' %}">logout</a> <a href="{% url 'password_reset' %}">reset password</a></p>
+    <p align="center">
+    <font id="MonthYear" size="25"> Here are your classes.</font>
+	<br>
+        <b>Math 180 Mon-Thurs 9-9:50am</b><br/>
+        <b>CI 103 Tues 2-2:50pm</b><br/>
+        <b>CI 103 Wed 3-4:50pm</b><br/>
+        <b>English 103 Mon,Wed,Fri 1-1:50pm</b><br/>
+        <b>Info 103 Mon,Fri 2:30-3:50pm</b><br/>
+        <b>Info 153 Tues,Thurs 11-12:20pm</b><br/>
+<a href="{% url 'home.htm/' %}">Go to Home page</a><br/>
+    <a href="{% url 'addclass.html' %}">Add a class</a><br/>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}
+
+</body>
+</html>
