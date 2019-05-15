@@ -38,6 +38,7 @@
     </style>
 </head>
 <body>
+{% if user.is_authenticated %}
     <h2>
         Course Addition for {{ user.username }}
     </h2>
@@ -77,5 +78,9 @@
             <input type="submit" value="Submit">
         </fieldset>
     </form>
+{% else %}
+  <p>You are not logged in. Please click below to login.</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
 </body>
 </html>
