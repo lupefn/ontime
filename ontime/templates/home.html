@@ -74,6 +74,7 @@
 			<td id="Sat6"> </td>
 		</tr>
 	</table>
+    <p align="center"><button onclick="lastMonth()">Previous Month</button><button onclick="currentMonth()">Current Month</button><button onclick="nextMonth()">Next Month</button></p>
 {% else %}
   <p>You are not logged in. Please click below to login.</p>
   <a href="{% url 'login' %}">login</a>
