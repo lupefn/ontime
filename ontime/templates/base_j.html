@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}OnTime Authentication{% endblock %}</title>
+    <title>{% block title %}OnTime Homepage{% endblock %}</title>
     <style>
         body {
             background: linear-gradient(to right, #ccffff 0%, #ffffcc 100%);
@@ -21,48 +21,58 @@
         }
 
 
-
         function cal() {
             var ycode, mcode, dcode, leapcode, centcode;
             var val;
-            console.log(month_num);
 
             if (month_num === 1) {
                 month = 'january';
-            }else if (month_num === 2){
+				m = 'jan';
+            } else if (month_num === 2) {
                 month = 'february';
-            }else if (month_num === 3){
+				m = 'feb';
+            } else if (month_num === 3) {
                 month = 'march';
-            }else if (month_num === 4){
+				m = 'mar';
+            } else if (month_num === 4) {
                 month = 'april';
-            }else if (month_num === 5){
+				m = 'apr';
+            } else if (month_num === 5) {
                 month = 'may';
-            }else if (month_num === 6){
+				m = 'may';
+            } else if (month_num === 6) {
                 month = 'june';
-            }else if (month_num === 7){
+				m = 'jun';
+            } else if (month_num === 7) {
                 month = 'july';
-            }else if (month_num === 8){
+				m = 'jul';
+            } else if (month_num === 8) {
                 month = 'august';
-            }else if (month_num === 9){
+				m = 'aug';
+            } else if (month_num === 9) {
                 month = 'september';
-            }else if (month_num === 10){
+				m = 'sep';
+            } else if (month_num === 10) {
                 month = 'october';
-            }else if (month_num === 11){
+				m = 'oct';
+            } else if (month_num === 11) {
                 month = 'november';
-            }else if (month_num === 12){
+				m = 'nov';
+            } else if (month_num === 12) {
                 month = 'december';
-            }else{
+				m = 'dec';
+            } else {
                 month = 'invalid';
+				m = 'invalid';
             }
 
-            m = month.substring(3);
-            console.log("FF");
             document.getElementById('MonthYear').innerHTML = caps(month) + " " + year; // changes title of calender to Month Year
-            // init(); // clears out calender, allows multiple calenders to be generated without refreshing page
+            init(); // clears out calender, allows multiple calenders to be generated without refreshing page
 
             yend = year.toString().slice(-2); // second half of year
             ycode = Number(yearCode());
             mcode = Number(monthCode());
+            console.log(mcode);
             dcode = dateCode();
             centcode = Number(centCode());
 
@@ -113,27 +123,27 @@
         function monthCode() { // picks month code
             if (m === 'jan') {
                 return 0;
-            } else if (m === 'feb') {
+            } else if (m == 'feb') {
                 return 3;
-            } else if (m === 'mar') {
+            } else if (m == 'mar') {
                 return 3;
-            } else if (m === 'apr') {
+            } else if (m == 'apr') {
                 return 6;
-            } else if (m === 'may') {
+            } else if (m == 'may') {
                 return 1;
-            } else if (m === 'jun') {
+            } else if (m == 'jun') {
                 return 4;
-            } else if (m === 'jul') {
+            } else if (m == 'jul') {
                 return 6;
-            } else if (m === 'aug') {
+            } else if (m == 'aug') {
                 return 2;
-            } else if (m === 'sep') {
+            } else if (m == 'sep') {
                 return 5;
-            } else if (m === 'oct') {
+            } else if (m == 'oct') {
                 return 0;
-            } else if (m === 'nov') {
+            } else if (m == 'nov') {
                 return 3;
-            } else if (m === 'dec') {
+            } else if (m == 'dec') {
                 return 5;
             } else { // debug, or in case of invalid input
                 return null;
@@ -142,7 +152,7 @@
         }
 
         function centCode() { // picks century code
-            var cent = year%100; // substrings to just look at century numbers
+            var cent = year % 100; // substrings to just look at century numbers
             console.log(cent);
             if (cent === 18) {
                 return 2;
@@ -179,6 +189,11 @@
         }
 
         function week(val, i) { // determines what day of the week it is and adds date to calender
+			if (val > 0){
+				val = val - 1;
+			}else{
+				val = 6
+			}
 
             if (val === 0) { // Sunday
 
@@ -191,7 +206,7 @@
                     document.getElementById('Sun3').innerHTML = i;
                 } else if (15 < i && i < 23) {
                     document.getElementById('Sun4').innerHTML = i;
-                } else if (22 < i && i < 29) {
+                } else if (22 < i && i < 30) {
                     document.getElementById('Sun5').innerHTML = i;
                 } else {
                     document.getElementById('Sun6').innerHTML = i;
@@ -344,6 +359,38 @@
             document.getElementById('Sat6').innerHTML = " ";
 
 
+        }
+
+        function lastMonth() {
+            init();
+            if (1 < month_num) {
+                month_num = month_num - 1;
+                cal();
+            } else {
+                month_num = 12;
+                year = year - 1;
+                cal();
+            }
+        }
+
+        function nextMonth() {
+            init();
+            if (month_num < 12) {
+                month_num = month_num + 1;
+                cal();
+            } else {
+                month_num = 1;
+                year = year + 1;
+                cal();
+            }
+        }
+
+        function currentMonth() {
+            init();
+            today = new Date();
+            month_num = today.getMonth() + 1;
+            year = today.getFullYear();
+            cal();
         }
 
 
