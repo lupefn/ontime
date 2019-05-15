@@ -5,6 +5,8 @@
     <title>Class Template</title>
 </head>
 <body>
+{% block content %}
+{% if user.is_authenticated %}
     <p align="center">Hi {{ user.name }}! Here is your class list</p>
     <p align="center"><a href="{% url 'logout' %}">logout</a> <a href="{% url 'password_reset' %}">reset password</a></p>
     <p align="center">
@@ -16,7 +18,7 @@
         <b>English 103 Mon,Wed,Fri 1-1:50pm</b><br/>
         <b>Info 103 Mon,Fri 2:30-3:50pm</b><br/>
         <b>Info 153 Tues,Thurs 11-12:20pm</b><br/>
-<a href="{% url 'home.htm/' %}">Go to Home page</a><br/>
+<a href="{% url 'templates/home.html' %}">Go to Home page</a><br/>
     <a href="{% url 'addclass.html' %}">Add a class</a><br/>
 {% else %}
   <p>You are not logged in</p>
