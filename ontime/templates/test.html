@@ -1,12 +1,21 @@
-{% extends 'base_j.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>OnTime Homepage</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #ccffff 0%, #ffffcc 100%);
+        }
+    </style>
+    <script>
+      
 
-{% block title %}Home{% endblock %}
-
-{% block content %}
-{% if user.is_authenticated %}
-    <p align="center">Hi {{ user.username }}! Welcome to OnTime.</p>
-    <p align="center"><a href="{% url 'logout' %}">logout</a> <a href="{% url 'password_reset' %}">reset password</a></p>
-    <p align="center">
+    </script>
+</head>
+<body onload="cal()">
+<main>
+        <p align="center">
     <font id="MonthYear" size="25"> Calendar</font>
 	<br><table align="center" border="2" bgcolor="#ffffff">
 		<tr border="2"> <!-- top row with days of the week -->
@@ -75,8 +84,6 @@
 		</tr>
 	</table>
     <p align="center"><button onclick="lastMonth()">Previous Month</button><button onclick="currentMonth()">Current Month</button><button onclick="nextMonth()">Next Month</button></p>
-{% else %}
-  <p>You are not logged in. Please click below to login.</p>
-  <a href="{% url 'login' %}">login</a>
-{% endif %}
-{% endblock %}
+</main>
+</body>
+</html>
