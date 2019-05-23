@@ -59,8 +59,8 @@ class CourseInstance(models.Model):
     )
     start_time = models.TimeField()
     end_time = models.TimeField()
-    start_date = models.DateField(auto_now_add=True, default=2019-01-01)
-    end_date = models.DateField(auto_now_add=True, default=2019-01-02)
+    start_date = models.DateField(auto_now_add=True)
+    end_date = models.DateField(auto_now_add=True)
 
     class Meta:
         ordering = ['professor_name', 'course_location', 'frequency_of_course', 'start_time',
