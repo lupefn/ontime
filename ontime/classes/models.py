@@ -1,29 +1,37 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Courses(models.Model):
     #fields for user input
-    course_CRN = models.PositiveIntegerField(max_length=6)
-    course_name = models.CharField(max_length=30, help_text='Enter course name:')
-    professor_name = models.CharField(max_length=40, help_text='Enter professor name:')
-    course_location = models.CharField(max_length=20, help_text='Enter course location:')
-    course_credits = models.PositiveIntegerField(max_length=1, help_text='Enter course credits:')
+    course_CRN = models.PositiveIntegerField(max_length=6, help_text='Enter your course CRN:',
+                                             default=000000)
+    #course_name field designated as the primary_key, making it a special database column to
+    # uniquely ID the different table records
+    course_name = models.CharField(primary_key=True, max_length=30, help_text='Enter course name:')
+    course_credits = models.PositiveIntegerField(max_length=1, help_text='Enter course credits:',
+                                                 default=0)
+    #creates relationship with CourseInstance class; on_delete allows for the value of the
+    # associated course instance to be Null if deleted; null = True to allow databse to store
+    # Null value if no instance is selected
+    instance = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True)
 
     #metadata
     class Meta:
-        ordering = ['course_CRN', 'course_name', 'professor_name', 'course_location', 'course_credits']
+        ordering = ['course_CRN', 'course_name', 'course_credits']
 
     #methods
-    def get_absolute_url(self):
-        return reverse('model-detail-view', args=str(self.id))
+    def get_absolute_url(self):#returns a URL to display individual model records on website
+        return reverse('course-detail', args=str(self.id))
 
     #string representation
     def __str__(self):
         myStr = ''
-        myStr += 'CRN: ' + str(self.course_CRN) + '\nCourse Name: ' + self.course_name + '\nCourse Professor: '+ self.professor_name + '\nCourse Location: ' + self.course_name + '\nCredit Number: '
+        myStr += 'CRN: ' + str(self.course_CRN) + '\nCourse Name: ' + self.course_name + \
+                 '\nCourse Credits: ' + str(self.course_credits)
         return myStr
 
-class CourseFrequency(models.Model):
+class CourseInstance(models.Model):
     MONDAY = 'MON'
     TUESDAY = 'TUES'
     WEDNESDAY = 'WED'
@@ -40,15 +48,29 @@ class CourseFrequency(models.Model):
         (SATURDAY, 'Saturday'),
         (SUNDAY, 'Sunday'),
     )
-    frequency_of_course = models.CharField(choices=DAYS_OF_THE_WEEK, default=None)
+    professor_name = models.CharField(max_length=40, help_text='Enter professor name:')
+    course_location = models.CharField(max_length=20, help_text='Enter course location:')
+    frequency_of_course = models.CharField(
+        max_length= 7,
+        primary_key=True,
+        choices=DAYS_OF_THE_WEEK,
+        default=None,
+        help_text='Course Frequency:'
+    )
     start_time = models.TimeField()
     end_time = models.TimeField()
+    start_date = models.DateField(auto_now_add=True, default=2019-01-01)
+    end_date = models.DateField(auto_now_add=True, default=2019-01-02)
 
     class Meta:
-        ordering = ['frequency_of_course', 'start_time', 'end_time']
+        ordering = ['professor_name', 'course_location', 'frequency_of_course', 'start_time',
+                    'end_time', 'start_date', 'end_date']
 
     def get_absolute_url(self):
-        pass
+        return reverse('course_instance-detail', args=str(self.id))
 
     def __str__(self):
-        return self.frequency_of_course
+        return 'Professor Name: ' + self.professor_name + 'Course Location: ' + \
+               self.course_location + '\nCourse Frequency: ' + self.frequency_of_course + \
+               '\nStart Time: ' + str(self.start_time) + '\nEnd Time: ' + str(self.end_time) + \
+               '\nStart Date: ' + str(self.start_date) + '\nEnd Date: ' + str(self.end_date)
