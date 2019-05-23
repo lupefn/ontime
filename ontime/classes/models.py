@@ -4,12 +4,12 @@ from django.urls import reverse
 # Create your models here.
 class Courses(models.Model):
     #fields for user input
-    course_CRN = models.PositiveIntegerField(max_length=6, help_text='Enter your course CRN:',
+    course_CRN = models.PositiveIntegerField(help_text='Enter your course CRN:',
                                              default=000000)
     #course_name field designated as the primary_key, making it a special database column to
     # uniquely ID the different table records
     course_name = models.CharField(primary_key=True, max_length=30, help_text='Enter course name:')
-    course_credits = models.PositiveIntegerField(max_length=1, help_text='Enter course credits:',
+    course_credits = models.PositiveIntegerField(help_text='Enter course credits:',
                                                  default=0)
     #creates relationship with CourseInstance class; on_delete allows for the value of the
     # associated course instance to be Null if deleted; null = True to allow databse to store
