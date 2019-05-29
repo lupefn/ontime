@@ -81,6 +81,11 @@
 </head>
 <body>
 
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
   <div id='script-warning'>
     <code>php/get-events.php</code> must be running.
   </div>
@@ -88,6 +93,10 @@
   <div id='loading'>loading...</div>
 
   <div id='calendar'></div>
-
+{% else %}
+  <p>You are not logged in. Please click below to login.</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}
 </body>
 </html>
