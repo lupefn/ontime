@@ -1,35 +1,37 @@
 from django.db import models
 from django.urls import reverse
 
+
 # Create your models here.
 class Courses(models.Model):
-    #fields for user input
+    # fields for user input
     course_CRN = models.PositiveIntegerField(help_text='Enter your course CRN:',
                                              default=000000)
-    #course_name field designated as the primary_key, making it a special database column to
+    # course_name field designated as the primary_key, making it a special database column to
     # uniquely ID the different table records
     course_name = models.CharField(primary_key=True, max_length=30, help_text='Enter course name:')
     course_credits = models.PositiveIntegerField(help_text='Enter course credits:',
                                                  default=0)
-    #creates relationship with CourseInstance class; on_delete allows for the value of the
+    # creates relationship with CourseInstance class; on_delete allows for the value of the
     # associated course instance to be Null if deleted; null = True to allow databse to store
     # Null value if no instance is selected
     instance = models.ForeignKey('CourseInstance', on_delete=models.SET_NULL, null=True)
 
-    #metadata
+    # metadata
     class Meta:
         ordering = ['course_CRN', 'course_name', 'course_credits']
 
-    #methods
-    def get_absolute_url(self):#returns a URL to display individual model records on website
+    # methods
+    def get_absolute_url(self):  # returns a URL to display individual model records on website
         return reverse('course-detail', args=str(self.id))
 
-    #string representation
+    # string representation
     def __str__(self):
         myStr = ''
         myStr += 'CRN: ' + str(self.course_CRN) + '\nCourse Name: ' + self.course_name + \
                  '\nCourse Credits: ' + str(self.course_credits)
         return myStr
+
 
 class CourseInstance(models.Model):
     MONDAY = 'MON'
@@ -51,7 +53,7 @@ class CourseInstance(models.Model):
     professor_name = models.CharField(max_length=40, help_text='Enter professor name:')
     course_location = models.CharField(max_length=20, help_text='Enter course location:')
     frequency_of_course = models.CharField(
-        max_length= 7,
+        max_length=7,
         primary_key=True,
         choices=DAYS_OF_THE_WEEK,
         default=None,
