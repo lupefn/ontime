@@ -1,7 +1,13 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
-from django.contrib.auth.models import User
 
+
+class DaysOfTheWeek(models.Model):
+    day = models.CharField(max_length=9)
+
+    def __str__(self):
+        return self.day
 
 
 # Create your models here.
@@ -12,9 +18,16 @@ class Classes(models.Model):
     credits = models.PositiveIntegerField(help_text='Enter course credits:', default=0)
     professor = models.CharField(max_length=30, help_text='Enter professor name:')
     location = models.CharField(max_length=50, help_text='Enter location:')
-    start_time = models.DateTimeField(help_text='Enter starting time of class:')
-    end_time = models.DateTimeField(help_text='Enter ending time of class:')
+    frequency_of_course = models.ManyToManyField(DaysOfTheWeek)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    start_date = models.DateField()
+    end_date = models.DateField()
     for_user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = 'Courses'
+        verbose_name = 'Course'
 
     # methods
     def get_absolute_url(self):  # returns a URL to display individual model records on website
@@ -22,9 +35,7 @@ class Classes(models.Model):
 
     # string representation
     def __str__(self):
-        myStr = ''
-        myStr += 'CRN: ' + str(self.CRN) + '\nCourse Name: ' + self.name + \
-                 '\nCourse Credits: ' + str(self.credits)
+        myStr = 'CRN: ' + str(self.CRN) + '\nCourse Name: ' + self.name + '\nCourse Credits: ' + str(self.credits)
         return myStr
 
     def get_name(self):
@@ -47,3 +58,9 @@ class Classes(models.Model):
 
     def get_end_time(self):
         return self.end_time
+
+    def get_end_date(self):
+        return self.end_date
+
+    def get_start_date(self):
+        return self.start_date

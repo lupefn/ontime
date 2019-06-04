@@ -1,86 +1,138 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends 'base.html' %}
+{% block title %}
     <title>Course Addition - OnTime Management</title>
     <style type="text/css">
-    p {
-        font-family: Helvetica;
-        padding-bottom: 1px;
-        padding-left: 5px;
-        text-align: left;
-    }
-    fieldset {
-        font-family: Helvetica;
-        display: block;
-    }
-    h2 {
-        font-family: Helvetica;
-        text-align: center;
-    }
-    h5 {
-        font-family: Helvetica;
-        text-align: center;
-    }
-    #freqChoices {
-        padding-left: 180px;
-        padding-bottom: 15px;
-    }
-    input[type=submit] {
-        background-color: darkblue;
-        border: none;
-        color: white;
-        padding: 14px 28px;
-        margin: 4px 2px;
-        cursor: pointer;
-        font-size: 15px;
-        border-radius: 25px;
-    }
+        p {
+            font-family: Verdana, Geneva, sans-serif;
+            padding-bottom: 1px;
+            padding-left: 5px;
+            text-align: center;
+        }
+
+        fieldset {
+            font-family: Verdana, Geneva, sans-serif;
+            display: block;
+        }
+
+        h3 {
+            font-family: Verdana, Geneva, sans-serif;
+            text-align: center;
+        }
+
+        h5 {
+            font-family: Verdana, Geneva, sans-serif;
+            text-align: center;
+        }
+
+        input[type=submit] {
+            background-color: darkblue;
+            border: none;
+            color: white;
+            padding: 14px 28px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-size: 15px;
+            border-radius: 25px;
+        }
+
+        body {
+            background: linear-gradient(to right, #ccffff 0%, #ffffcc 100%);
+            text-align: center;
+        }
+
+        form {
+            font-family: Verdana, Geneva, sans-serif;
+            display: inline-block;
+        }
+
+        .field_wrapper {
+            padding: 3px 3px 3px 3px;
+        }
     </style>
-</head>
-<body>
-{% if user.is_authenticated %}
-    <h2>
-        Course Addition for {{ user.username }}
-    </h2>
-    <h5>
-        Enter the prompted information to add your course to your OnTime schedule.
-    </h5>
-    <form action="/classes.html" target="_self" method="post">
-        <fieldset>
-            <legend>
-                Course Information
-            </legend>
-            <br>
-            <p>Name of Course: <input type="text" name="className"></p><br>
-            <p>Name of Professor/Teacher: <input type="text" name="profName"></p><br>
-            <p>Room Number/Location: <input type="text" name="location"></p><br>
-            <p>Frequency of Classes: </p>
-            <div id="freqChoices">
-                <input type="checkbox" name="day" value="monday">
-                Monday<br>
-                <input type="checkbox" name="day" value="tuesday">
-                Tuesday<br>
-                <input type="checkbox" name="day" value="wednesday">
-                Wednesday<br>
-                <input type="checkbox" name="day" value="thursday">
-                Thursday<br>
-                <input type="checkbox" name="day" value="friday">
-                Friday<br>
-                <input type="checkbox" name="day" value="saturday">
-                Saturday<br>
-                <input type="checkbox" name="day" value="sunday">
-                Sunday<br>
-            </div>
-            <p>Scheduled Time (Start): <input type="text" name="startTime"></p><br>
-            <p>Schedule Time (End): <input type="text" name="endTime"></p><br>
-            <p>Amount of Credits Allotted: <input type="text" name="numCredits"></p><br>
+{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <h3>
+            Course Addition for {{ user.username }}
+        </h3>
+        <p align="center">
+            <button type="button" onclick="window.location.href='/'">View Calendar</button>
+            <button type="button" onclick="window.location.href='/mycalendar/classlist'">View Classes</button>
+            <button type="button" onclick="{% url 'logout' %}">Logout</button>
+        </p>
+        <p>
+            Enter the prompted information to add your course to your OnTime schedule.
+        </p>
+        <form method='POST' action="">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            {#        <div class="field_wrapper">#}
+            {#            {{ form.CRN.errors }}#}
+            {#            <label for="{{ form.CRN.id_for_label }}">Course CRN:</label>#}
+            {#            {{ form.CRN }}#}
+            {#        </div>#}
+            {##}
+            {#        <div class="field_wrapper">#}
+            {#            {{ form.name.errors }}#}
+            {#            <label for="{{ form.name.id_for_label }}">Course Name:</label>#}
+            {#            {{ form.name }}#}
+            {#        </div>#}
+            {##}
+            {#        <div class="field_wrapper">#}
+            {#            {{ form.credits.errors }}#}
+            {#            <label for="{{ form.credits.id_for_label }}">Course Credits:</label>#}
+            {#            {{ form.credits }}#}
+            {#        </div>#}
+            {##}
+            {#        <div class="field_wrapper">#}
+            {#            {{ form.professor.errors }}#}
+            {#            <label for="{{ form.professor.id_for_label }}">Professor Name:</label>#}
+            {#            {{ form.professor }}#}
+            {#        </div>#}
+            {##}
+            {#        <div class="field_wrapper">#}
+            {#            {{ form.location.errors }}#}
+            {#            <label for="{{ form.location.id_for_label }}">Course Location:</label>#}
+            {#            {{ form.location }}#}
+            {#        </div>#}
+            {##}
+            {#        <div class="field_wrapper">#}
+            {#            {{ form.frequency_of_course.errors }}#}
+            {#            <label for="{{ form.frequency_of_course.id_for_label }}">Frequency of Course:</label>#}
+            {#            {{ form.frequency_of_course }}#}
+            {#        </div>#}
+            {##}
+            {#        <div class="field_wrapper">#}
+            {#            {{ form.start_time.errors }}#}
+            {#            <label for="{{ form.start_time.id_for_label }}">Start Time:</label>#}
+            {#            {{ form.start_time }}#}
+            {#        </div>#}
+            {##}
+            {#        <div class="field_wrapper">#}
+            {#            {{ form.end_time.errors }}#}
+            {#            <label for="{{ form.end_time.id_for_label }}">End Time:</label>#}
+            {#            {{ form.end_time }}#}
+            {#        </div>#}
+            {##}
+            {#        <div class="field_wrapper">#}
+            {#            {{ form.start_date.errors }}#}
+            {#            <label for="{{ form.start_date.id_for_label }}">Start Date:</label>#}
+            {#            {{ form.start_date }}#}
+            {#        </div>#}
+            {##}
+            {#        <div class="field_wrapper">#}
+            {#            {{ form.end_date.errors }}#}
+            {#            <label for="{{ form.end_date.id_for_label }}">End Date:</label>#}
+            {#            {{ form.end_date }}#}
+            {#        </div>#}
+
+            {{ form.as_p }}
 
             <input type="submit" value="Submit">
-        </fieldset>
-    </form>
-{% else %}
-  <p>You are not logged in. Please click below to login.</p>
-  <a href="{% url 'login' %}">login</a>
-{% endif %}
-</body>
-</html>
+        </form>
+    {% else %}
+        <p>You are not logged in. Please click below to login.</p>
+        <a href="{% url 'login' %}">login</a>
+    {% endif %}
+{% endblock %}

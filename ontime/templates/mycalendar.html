@@ -1,99 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset='utf-8' />
-<link href='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/core/main.css' rel='stylesheet' />
-<link href='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/daygrid/main.css' rel='stylesheet' />
-<link href='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/timegrid/main.css' rel='stylesheet' />
-<link href='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/list/main.css' rel='stylesheet' />
-<script src='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/core/main.js'></script>
-<script src='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/interaction/main.js'></script>
-<script src='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/daygrid/main.js'></script>
-<script src='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/timegrid/main.js'></script>
-<script src='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/list/main.js'></script>
-<script>
+    <meta charset='utf-8'/>
+    <link href='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/core/main.css' rel='stylesheet'/>
+    <link href='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/daygrid/main.css' rel='stylesheet'/>
+    <link href='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/timegrid/main.css' rel='stylesheet'/>
+    <link href='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/list/main.css' rel='stylesheet'/>
+    <script src='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/core/main.js'></script>
+    <script src='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/interaction/main.js'></script>
+    <script src='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/daygrid/main.js'></script>
+    <script src='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/timegrid/main.js'></script>
+    <script src='https://www.cs.drexel.edu/~egc39/fullcalendar-4.1.0/packages/list/main.js'></script>
+    <script>
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                defaultDate: '2019-06-03',
+                editable: true,
+                navLinks: true, // can click day/week names to navigate views
+                eventLimit: true, // allow "more" link when too many events
+                events: {
+                    url: '../send_events/',
+                    failure: function () {
+                        document.getElementById('script-warning').style.display = 'block'
+                    }
+                },
+                loading: function (bool) {
+                    document.getElementById('loading').style.display =
+                        bool ? 'block' : 'none';
+                }
+            });
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-      },
-      defaultDate: '2019-04-12',
-      editable: true,
-      navLinks: true, // can click day/week names to navigate views
-      eventLimit: true, // allow "more" link when too many events
-      events: {
-        url: '../send_events/',
-        failure: function() {
-          document.getElementById('script-warning').style.display = 'block'
+            calendar.render();
+        });
+
+    </script>
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 14px;
         }
-      },
-      loading: function(bool) {
-        document.getElementById('loading').style.display =
-          bool ? 'block' : 'none';
-      }
-    });
 
-    calendar.render();
-  });
+        #script-warning {
+            display: none;
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            padding: 0 10px;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            color: red;
+        }
 
-</script>
-<style>
+        #loading {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
 
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
+        #calendar {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 10px;
+        }
 
-  #script-warning {
-    display: none;
-    background: #eee;
-    border-bottom: 1px solid #ddd;
-    padding: 0 10px;
-    line-height: 40px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 12px;
-    color: red;
-  }
 
-  #loading {
-    display: none;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-
-  #calendar {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 10px;
-  }
-
-</style>
+    </style>
 </head>
 <body>
 {% block content %}
-{% if user.is_authenticated %}
+    {% if user.is_authenticated %}
 
-  <div id='script-warning'>
-    <code>php/get-events.php</code> must be running.
-  </div>
+        <div id='script-warning'>
+            <code>php/get-events.php</code> must be running.
+        </div>
 
-  <div id='loading'>loading...</div>
+        <div id='loading'>loading...</div>
 
-  <div id='calendar'></div>
-{% else %}
-  <p>You are not logged in. Please click below to login.</p>
-  <a href="{% url 'login' %}">login</a>
-{% endif %}
+        <h3 align="center">Welcome to OnTime {{ user.username }}!</h3>
+        <h1 align="center">Your Calendar</h1>
+        <p align="center">
+            <button type="button" onclick="window.location.href='/mycalendar/classadd'">Add a Class</button>
+            <button type="button" onclick="window.location.href='/mycalendar/classlist'">View Classes</button>
+            <button type="button" onclick="{% url 'logout' %}">Logout</button>
+            <button type="button" onclick="{% url 'password_reset' %}">Reset Password</button>
+        </p>
+        <div id='calendar'></div>
+    {% else %}
+        <p>You are not logged in. Please click below to login.</p>
+        <a href="{% url 'login' %}">login</a>
+    {% endif %}
 {% endblock %}
 </body>
 </html>

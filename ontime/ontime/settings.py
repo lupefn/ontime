@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
-    'classes.apps.ClassesConfig',
     'mycalendar.apps.MycalendarConfig',
 ]
 

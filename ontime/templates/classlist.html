@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Course Addition - OnTime Management</title>
+    <style type="text/css">
+        p {
+            font-family: Verdana, Geneva, sans-serif;
+            padding-bottom: 1px;
+            padding-left: 5px;
+            text-align: center;
+        }
+
+        fieldset {
+            font-family: Verdana, Geneva, sans-serif;
+            display: block;
+        }
+
+        h3 {
+            font-family: Verdana, Geneva, sans-serif;
+            text-align: center;
+        }
+
+        h5 {
+            font-family: Verdana, Geneva, sans-serif;
+            text-align: center;
+        }
+
+        input[type=submit] {
+            background-color: darkblue;
+            border: none;
+            color: white;
+            padding: 14px 28px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-size: 15px;
+            border-radius: 25px;
+        }
+
+        body {
+            background: linear-gradient(to right, #ccffff 0%, #ffffcc 100%);
+            text-align: center;
+        }
+
+        form {
+            font-family: Verdana, Geneva, sans-serif;
+            display: inline-block;
+        }
+
+        .field_wrapper {
+            padding: 3px 3px 3px 3px;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <h3>
+            Course List for {{ user.username }}
+        </h3>
+        <p align="center">
+            <button type="button" onclick="window.location.href='/'">View Calendar</button>
+            <button type="button" onclick="window.location.href='/mycalendar/classadd'">Add a Class</button>
+            <button type="button" onclick="{% url 'logout' %}">Logout</button>
+        </p>
+        {% if classes %}
+            {% for class in classes %}
+                <h1>{{ class.name }}</h1>
+                <table align="center" border="2" bgcolor="#ffffff">
+                    <tr border="2">
+                        <td>Course CRN:</td>
+                        <td>{{ class.CRN }}</td>
+                    </tr>
+                    <tr border="2">
+                        <td>Credits:</td>
+                        <td>{{ class.credits }}</td>
+                    </tr>
+                    <tr border="2">
+                        <td>Professor:</td>
+                        <td>{{ class.professor }}</td>
+                    </tr>
+                    <tr border="2">
+                        <td>Location:</td>
+                        <td>{{ class.location }}</td>
+                    </tr>
+                    <tr border="2">
+                        <td>First day of Term:</td>
+                        <td>{{ class.start_date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Last day of Term:</td>
+                        <td>{{ class.end_date }}</td>
+                    </tr>
+                    <tr border="2">
+                        <td>Class Start Time:</td>
+                        <td>{{ class.start_time }}</td>
+                    </tr>
+                    <tr>
+                        <td>Class End Time:</td>
+                        <td>{{ class.end_time }}</td>
+                    </tr>
+                </table>
+                <br><br><br>
+            {% endfor %}
+        {% endif %}
+    {% else %}
+        <p>You are not logged in. Please click below to login.</p>
+        <a href="{% url 'login' %}">login</a>
+    {% endif %}
+{% endblock %}

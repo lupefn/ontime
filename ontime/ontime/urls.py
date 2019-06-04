@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('classes/', include('classes.urls')),
+    path('mycalendar/', include('mycalendar.urls')),
     path('', mycalendar_view, name='mycalendar'),
     path('send_events/', send_events, name="send_events")
 ]
