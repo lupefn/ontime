@@ -34,10 +34,10 @@ Please see our system's manual for getting started and deployment instructions.
 
 # Authors:
 * [Billy Carroll](mailto:wjc52@drexel.edu), wjc52
-* [Emma Carton]((mailto:egc39@drexel.edu)), egc39
-* [Aiden Doris](mailto:asd95@drexel.edu)), asd95
-* [Lupe Fernandez-Nunez](mailto:gf347@drexel.edu)), gf347
-* [Dylan Robak](mailto:dnr44@drexel.edu)), dnr44
+* [Emma Carton]((mailto:egc39@drexel.edu), egc39
+* [Aiden Doris](mailto:asd95@drexel.edu), asd95
+* [Lupe Fernandez-Nunez](mailto:gf347@drexel.edu), gf347
+* [Dylan Robak](mailto:dnr44@drexel.edu), dnr44
 
 # License:
 This project is licensed under the GNU General Public License v3.0.
