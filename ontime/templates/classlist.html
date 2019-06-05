@@ -1,3 +1,10 @@
+<!--
+# templates/classlist.html
+# Page that displays list of all classes
+# Version 1.4
+# Authors: Emma Carton, Lupe Fernandez-Nunez
+# Dependencies: base.html
+-->
 {% extends 'base.html' %}
 {% block title %}
     <title>Course Addition - OnTime Management</title>
@@ -58,7 +65,7 @@
         <p align="center">
             <button type="button" onclick="window.location.href='/'">View Calendar</button>
             <button type="button" onclick="window.location.href='/mycalendar/classadd'">Add a Class</button>
-            <button type="button" onclick="{% url 'logout' %}">Logout</button>
+            <button type="button" onclick="window.location.href='{% url 'logout' %}'">Logout</button>
         </p>
         {% if classes %}
             {% for class in classes %}
@@ -102,6 +109,7 @@
         {% endif %}
     {% else %}
         <p>You are not logged in. Please click below to login.</p>
-        <a href="{% url 'login' %}">login</a>
+        <button onclick="window.location.href='{% url 'login' %}'">Login</button>
+        <button onclick="window.location.href='/accounts/signup'">Sign Up</button>
     {% endif %}
 {% endblock %}

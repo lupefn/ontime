@@ -1,3 +1,8 @@
+# mycalendar/views.py
+# Holds functions to display events on calendar and class list page, displaying calendar, and getting input from the form
+# Version 3.3
+# Authors: Lupe Fernandez-Nunez, Emma Carton (following tutorial)
+# Dependencies: django library, mycalendar/forms.py, mycalendar/models, datetime
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import datetime
@@ -30,14 +35,11 @@ def mycalendar_view(request):
 def send_events(request):
     starty = request.GET.get("start").replace("%3A", ":")
     endy = request.GET.get("end").replace("%3A", ":")
-    print(starty)
-    print(endy)
     start_date = datetime.datetime.fromisoformat(starty)
     end_date = datetime.datetime.fromisoformat(endy)
     events = Classes.objects.filter(for_user__username__exact=request.user)
     x = []
     for event in events:
-        # if start_date <= event.get_start_time() and end_date >= event.get_end_time():
         dicty = {}
         dicty["title"] = event.get_name()
         temp_date_start = event.get_start_date()
@@ -70,12 +72,9 @@ def send_events(request):
             else:
                 pass
         dicty["daysOfWeek"] = temp1
-        dicty["url"] = "http://google.com/"
+        dicty["url"] = "/mycalendar/classlist"
         dicty["endRecur"] = event.get_end_date()
         dicty["endTime"] = event.get_end_time()
         x.append(dicty)
-    print(x)
-    print(start_date)
-    print(end_date)
 
     return JsonResponse(x, safe=False)

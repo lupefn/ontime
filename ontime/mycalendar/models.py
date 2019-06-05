@@ -1,3 +1,8 @@
+# mycalendar/models.py
+# Classes class holds user-inputted information on their courses
+# Version 2.6
+# Authors: Lupe Fernandez-Nunez, Emma Carton
+# Dependencies: django.apps library
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
@@ -10,7 +15,6 @@ class DaysOfTheWeek(models.Model):
         return self.day
 
 
-# Create your models here.
 class Classes(models.Model):
     # fields for user input
     CRN = models.CharField(max_length=6)
@@ -29,8 +33,8 @@ class Classes(models.Model):
         verbose_name_plural = 'Courses'
         verbose_name = 'Course'
 
-    # methods
-    def get_absolute_url(self):  # returns a URL to display individual model records on website
+    # returns a URL to display individual model records on website
+    def get_absolute_url(self):
         return reverse('course-detail', args=str(self.id))
 
     # string representation
@@ -38,6 +42,7 @@ class Classes(models.Model):
         myStr = 'CRN: ' + str(self.CRN) + '\nCourse Name: ' + self.name + '\nCourse Credits: ' + str(self.credits)
         return myStr
 
+    #getters and setters
     def get_name(self):
         return self.name
 

@@ -1,3 +1,8 @@
+# ontime/urls.py
+# Configures url paths for overall project
+# Version 2.0
+# Authors: Emma Carton
+# Dependencies: django library, mycalendar/views.py
 """ontime URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:

@@ -1,31 +1,42 @@
+<!--
+# templates/registration/login.html
+# Login page
+# Version 2.1
+# Authors: Emma Carton (following tutorial), Lupe Fernandez-Nunez
+# Dependencies: base.html
+-->
 {% extends 'base.html' %}
 
 {% block title %}
     <title>OnTime Login Page</title>
     <style type="text/css">
-    p {
-        text-align: center;
-    }
-    button {
-        font-family: Verdana, Geneva, sans-serif;
-    }
-    h2 {
-        text-align: center;
-        font-family: Verdana, Geneva, sans-serif;
-    }
-    form {
-        font-family: Verdana, Geneva, sans-serif;
-        display: inline-block;
-        font-size: 10px;
-    }
+        p {
+            text-align: center;
+        }
+
+        button {
+            font-family: Verdana, Geneva, sans-serif;
+        }
+
+        h2 {
+            text-align: center;
+            font-family: Verdana, Geneva, sans-serif;
+        }
+
+        form {
+            font-family: Verdana, Geneva, sans-serif;
+            display: inline-block;
+            font-size: 10px;
+        }
     </style>
 {% endblock %}
 
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+        <button onclick="window.location.href='/accounts/signup'">Sign Up</button>
+    </form>
 {% endblock %}
