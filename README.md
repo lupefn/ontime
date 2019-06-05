@@ -33,11 +33,11 @@ Please see our system's manual for getting started and deployment instructions.
 * [FullCalendarAPI](https://fullcalendar.io/docs) - The API used to display the full calendar layout
 
 # Authors:
-* Billy Carroll, wjc52
-* Emma Carton, egc39
-* Aiden Doris, asd95
-* Lupe Fernandez-Nunez, gf347
-* Dylan Robak, dnr44
+* [Billy Carroll](mailto:wjc52@drexel.edu), wjc52
+* [Emma Carton]((mailto:egc39@drexel.edu)), egc39
+* [Aiden Doris](mailto:asd95@drexel.edu)), asd95
+* [Lupe Fernandez-Nunez](mailto:gf347@drexel.edu)), gf347
+* [Dylan Robak](mailto:dnr44@drexel.edu)), dnr44
 
 # License:
 This project is licensed under the GNU General Public License v3.0.
