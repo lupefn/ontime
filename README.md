@@ -3,8 +3,6 @@
 ---
 OnTime is an online web application catered to students to allow them to add their courseload onto a calendar layout for the purposes of easing the task of managing their time. This application allows students to detail their courses by their credit hours, its location, frequency, start and end times,  start and end dates, and any other additional notes. Users are able to create an account on our application to further personalize their overall schedule.
 
-setting up, testing, deploying, and changing the codease
-describe dependenceies and interactions with other systems
 # Getting Started:
 Please see our system's manual for getting started and deployment instructions.
 
